@@ -1,18 +1,25 @@
 import React from 'react'
-import { useState,useEffect } from 'react'
-import { useParams, Outlet } from 'react-router-dom'
+//import { useState,useEffect } from 'react'
+import { Outlet, useLoaderData } from 'react-router-dom'
 import { Link, NavLink } from 'react-router-dom'
+import { getHostVans } from '../../api'
+
+export function loader ({params}){
+  return getHostVans(params.id)
+}
 
 const HostVanDetail = () => {
 
-    const params = useParams()
-    const [vandetail, setvandetail]= useState()
+    //const params = useParams()
+    //const [vandetail, setvandetail]= useState()
 
-    useEffect(()=> {
-       fetch(`/api/host/vans/${params.id}`)
-       .then(res=> res.json())
-       .then(data => setvandetail(data.vans))
-    }, [params.id])
+    const vandetail = useLoaderData()
+
+   // useEffect(()=> {
+     //  fetch(`/api/host/vans/${params.id}`)
+       //.then(res=> res.json())
+       //.then(data => setvandetail(data.vans))
+    //}, [params.id])
 
     if(!vandetail){
         return <h1>loading.....</h1>
@@ -77,7 +84,7 @@ const HostVanDetail = () => {
 
 
             </nav>
-        <Outlet  context={[vandetail, setvandetail]}/>
+        <Outlet  context={[vandetail]}/>
       </div>
 
 

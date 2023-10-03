@@ -1,5 +1,6 @@
 import React from 'react'
 import {Link, NavLink } from 'react-router-dom'
+import loginimg from "../assets/images/avatar-icon.png"
 
 const Header = () => {
 
@@ -33,6 +34,13 @@ const Header = () => {
         >
           Vans
         </NavLink>
+
+        <Link to="login" className="login-link">
+                    <img 
+                        src={loginimg}
+                        className="login-icon"
+                    />
+                </Link>
       </nav>
      </header>
   )
