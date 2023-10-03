@@ -14,11 +14,12 @@ export async function loginAction ({request}){
  const formData = await request.formData()
  const email = formData.get("email")
  const password = formData.get("password")
+ const pathname = new URL(request.url).searchParams.get("redirectTo") || "/host"
 
  try {
     const data = await loginUser({email, password})
     localStorage.setItem("loggedin", true)
-    const response = redirect("/Host")
+    const response = redirect(pathname) 
     response.body=true
      return response
  } catch (err){
